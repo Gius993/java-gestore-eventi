@@ -10,11 +10,11 @@ public class Main {
 		Scanner scan = new Scanner(System.in);
 
 		List<Evento> Eventi = new ArrayList<>();
+		ProgrammEventi pe = new ProgrammEventi("gdr", Eventi);
 		boolean whilMainCicle = true;
-		String tipoEvento;
-		System.out.println("Che tipo di evento cerchi? Concerto o Evento generico?)");
+		System.out.println("Che tipo di evento cerchi? Concerto o Evento?)");
 		String eventoConcertoNon = scan.next();
-		if (eventoConcertoNon.equals("Evento generico")) {
+		if (eventoConcertoNon.equals("Evento")) {
 			while (whilMainCicle) {
 
 				System.out.println("Vuoi creare un nuovo evento? si no)");
@@ -87,12 +87,25 @@ public class Main {
 					whilMainCicle = false;
 					scan.close();
 				}
+				if (pe.numeroEventi() > 0) {
+					pe.listaEventi();
+					System.out.println("Numero eventi " + pe.numeroEventi());
+					
+					System.out.println("Vuoi eliminare tutti gli eventi? si no");
+					String e = scan.next();
+					if (!e.equals("si")) {		
+						pe.ordinaData();
+					} else {
+						pe.svuotaArray();
+						System.out.println("Numero eventi " + pe.numeroEventi());
+					}
+				}
 			}
 
-		} else if(eventoConcertoNon.equals("Concerto")) {
+		} else if (eventoConcertoNon.equals("Concerto")) {
 			Concerto c = new Concerto("Ey jion jon", 18, 22, 2023, LocalDate.now(), 2008, 0, "50.78", 22, 0);
 			System.out.println(c);
-		}else {
+		} else {
 			System.out.println("Non esiste tale evento");
 		}
 
